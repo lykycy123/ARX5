@@ -1,0 +1,2 @@
+arm_control
+-DCATKIN_DEVEL_PREFIX=/home/lyk/arx_ws/src/ARX_X5_SDK_V2/devel -DCMAKE_INSTALL_PREFIX=/home/lyk/arx_ws/src/ARX_X5_SDK_V2/install -G Unix Makefiles
