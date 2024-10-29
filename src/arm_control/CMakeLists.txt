@@ -79,6 +79,12 @@ target_link_libraries(follow_joint_trajectory_node
   ${catkin_LIBRARIES}
 )
 
+add_executable(joint_pub_test_node src/joint_pub_test.cpp)
+target_link_libraries(joint_pub_test_node
+  ${catkin_LIBRARIES}
+)
+
+
 
 
 

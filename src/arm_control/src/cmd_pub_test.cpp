@@ -74,6 +74,32 @@ int main(int argc, char *argv[])
     msg0.gripper = 0;
 
 
+
+    //turn around
+    arm_control::PosCmd msg5;
+    msg0.x = 0.0;
+    msg0.y = 0.0;
+    msg0.z = 0.0;
+    msg0.roll = 0.0;
+    msg0.pitch = 0.0;
+    msg0.yaw = PI;
+    //close 0; open_max 5
+    msg0.gripper = 0;
+
+
+
+    //loose object
+    arm_control::PosCmd msg6;
+    msg0.x = 0.0;
+    msg0.y = 0.0;
+    msg0.z = 0.0;
+    msg0.roll = 0.0;
+    msg0.pitch = 0.0;
+    msg0.yaw = PI;
+    //close 0; open_max 5
+    msg0.gripper = 5;
+
+
     ros::Rate loop_rate(1);
 
     while (ros::ok())
@@ -98,6 +124,16 @@ int main(int argc, char *argv[])
         sleep(3);
         printf("msg0\n");
         pub.publish(msg0);
+
+
+        sleep(3);
+        printf("msg5\n");
+        pub.publish(msg5);
+
+
+        sleep(3);
+        printf("msg6\n");
+        pub.publish(msg6);
 
         ros::spin();
 

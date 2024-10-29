@@ -50,7 +50,7 @@ void execute_callback(const control_msgs::FollowJointTrajectoryGoalConstPtr& goa
     arm_control::JointControl msg;
     for(int i = 0; i < moveit_tra.joint_trajectory.points.size(); i++)
     {
-        for(int j = 0; j < 6; j++)
+        for(int j = 0; j < 7; j++)
         {
             msg.joint_pos[j] = moveit_tra.joint_trajectory.points[i].positions[j];
             msg.joint_vel[j] = 0.0;
