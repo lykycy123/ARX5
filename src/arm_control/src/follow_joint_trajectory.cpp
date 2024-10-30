@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
     ros::init(argc,argv,"moveit_action_server");
     ros::NodeHandle nh;
 
-    pub = nh.advertise<arm_control::JointControl>("JointControl", 10);
+    pub = nh.advertise<arm_control::JointControl>("joint_control", 10);
 
     // 创建 action 对象(NodeHandle，话题名称，回调函数解析传入的目标值，服务器是否自启动)
     Server moveit_server(nh,"arx5_arm_controller/follow_joint_trajectory", boost::bind(&execute_callback, _1, &moveit_server), false);
