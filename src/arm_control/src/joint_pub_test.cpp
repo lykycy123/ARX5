@@ -12,23 +12,22 @@ int main(int argc, char *argv[])
     ros::Publisher pub = n.advertise<arm_control::JointControl>("joint_control", 10);
 
     arm_control::JointControl msg1;
-    msg1.joint_pos = {0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    msg1.joint_pos = {0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 1.0};
     msg1.joint_vel = {0};
     msg1.joint_cur = {0};
 
 
-    ros::Rate loop_rate(1);
+    // ros::Rate loop_rate(1);
 
-    while (ros::ok())
-    {
-        sleep(3);
+    // while (ros::ok())
+    // {
+        sleep(1);
         printf("msg1\n");
         pub.publish(msg1);
 
-
         ros::spin();
 
-        loop_rate.sleep();
-    }
+    //     loop_rate.sleep();
+    // }
     return 0;
 }

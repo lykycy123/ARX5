@@ -13,7 +13,10 @@ typedef actionlib::SimpleActionServer<control_msgs::FollowJointTrajectoryAction>
 // 用于存储 moveit 发送出来的轨迹数据
 moveit_msgs::RobotTrajectory moveit_tra;
 
-void execute_callback(const control_msgs::FollowJointTrajectoryGoalConstPtr& goalPtr, Server* moveit_server, ros::Publisher &pub)
+//create publisher
+ros::Publisher pub;
+
+void execute_callback(const control_msgs::FollowJointTrajectoryGoalConstPtr& goalPtr, Server* moveit_server)
 {
     // 1、解析提交的目标值
     int n_joints = goalPtr->trajectory.joint_names.size();
@@ -50,7 +53,7 @@ void execute_callback(const control_msgs::FollowJointTrajectoryGoalConstPtr& goa
     arm_control::JointControl msg;
     for(int i = 0; i < moveit_tra.joint_trajectory.points.size(); i++)
     {
-        for(int j = 0; j < 7; j++)
+        for(int j = 0; j < n_joints; j++)
         {
             msg.joint_pos[j] = moveit_tra.joint_trajectory.points[i].positions[j];
             msg.joint_vel[j] = 0.0;
@@ -72,12 +75,13 @@ int main(int argc, char *argv[])
     ros::init(argc,argv,"moveit_action_server");
     ros::NodeHandle nh;
 
-    ros::Publisher pub = nh.advertise<arm_control::JointControl>("JointControl", 10);
+    pub = nh.advertise<arm_control::JointControl>("JointControl", 10);
 
     // 创建 action 对象(NodeHandle，话题名称，回调函数解析传入的目标值，服务器是否自启动)
-    Server moveit_server(nh,"arx5_arm_controller/follow_joint_trajectory", boost::bind(&execute_callback, _1, &moveit_server, pub), false);
+    Server moveit_server(nh,"arx5_arm_controller/follow_joint_trajectory", boost::bind(&execute_callback, _1, &moveit_server), false);
     // 手动启动服务器
     moveit_server.start();
+    
         
 
     ros::spin();
