@@ -61,7 +61,7 @@ void execute_callback(const control_msgs::FollowJointTrajectoryGoalConstPtr& goa
 
             printf("msg.joint_pos: %f \n", msg.joint_pos[j]);
         }
-        sleep(1);
+        //sleep(1);
         printf("msg\n");
         pub.publish(msg);
     }
